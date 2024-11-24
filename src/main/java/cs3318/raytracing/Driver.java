@@ -25,6 +25,9 @@ class Driver  {
 
     int width, height;
 
+    // remove logic for checking file and parsing it, since we will now be using an API/ programatic about it instead
+    // Instead if an external file, lets have code add functions to this class where we can programatically just add or instantiate the variable values we wish to render
+    // so like addHeight(Height height) { height.add(height); } and such
     public Driver(int width, int height, String dataFile) {
         this.width = width;
         this.height = height;
