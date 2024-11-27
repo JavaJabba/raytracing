@@ -18,6 +18,19 @@ class Surface {
     private static final float TINY = 0.001f;
     private static final float I255 = 0.00392156f;  // 1/255
 
+    /**
+     * constructs the surface
+     * @param rval red value
+     * @param gval green value
+     * @param bval blue values
+     * @param ambiance ambiance refelction coefficient
+     * @param diffuse diffuse reflection coefficient
+     * @param specular specular reflection transmission
+     * @param phong phong exponent
+     * @param reflectance reflectance coefficient
+     * @param transmission transmission coefficient
+     * @param index index
+     */
     public Surface(float rval, float gval, float bval, float ambiance, float diffuse, float specular, float phong, float reflectance, float transmission, float index) {
         this.ir = rval;
         this.ig = gval;
