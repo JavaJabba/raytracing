@@ -19,7 +19,7 @@ class Ray {
         this.t = MAX_T;
         this.object = null;
         for (Object objList : objects) {
-            Object object = (Object) objList;
+            Renderable object = (Renderable) objList;
             object.intersect(this);
         }
         return (object != null);
