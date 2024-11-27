@@ -43,27 +43,6 @@ class Light {
         }
     }
 
-    /**
-     * getters for the light source
-     * @return
-     */
-
-
-    /**
-     * getters for the vector associated with the light
-     * @return
-     */
-
-
-    /**
-     * gets the intensity of the green channel of light
-     * @return
-     */
-
-    /**
-     * gets the intensity of the blue channel of the light
-     * @return the blue intensity
-     */
 
 
     @Override
@@ -84,26 +63,45 @@ class Light {
         return sb.toString();
     }
 
+    /**
+     * getters for the light type
+     * @return class
+     */
     public int getLightType() {
         return lightType;
     }
 
+    /**
+     * getter for the light source
+     * @return vector3D
+     */
     public Vector3D getLvec() {
         return lvec;
     }
-
+    /**
+     * getters for the light source
+     */
     public void setLvec(Vector3D lvec) {
         this.lvec = lvec;
     }
-
+    /**
+     * getters for the vector associated with the light
+     * @return the blue intensity
+     */
     public float getIr() {
         return ir;
     }
-
+    /**
+     * gets the intensity of the green channel of light
+     * @return the green intensity
+     */
     public float getIg() {
         return ig;
     }
-
+    /**
+     * gets the intensity of the blue channel of the light
+     * @return the blue intensity
+     */
     public float getIb() {
         return ib;
     }
