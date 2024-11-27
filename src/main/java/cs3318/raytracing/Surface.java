@@ -18,20 +18,23 @@ class Surface {
     private static final float TINY = 0.001f;
     private static final float I255 = 0.00392156f;  // 1/255
 
-    public Surface(float rval, float gval, float bval, float a, float d, float s, float n, float r, float t, float index) {
-        ir = rval;
-        ig = gval;
-        ib = bval;
-        ka = a;
-        kd = d;
-        ks = s;
-        ns = n;
-        kr = r * I255;
-        kt = t;
-        nt = index;
+    public Surface(float rval, float gval, float bval, float ambiance, float diffuse, float specular, float phong, float reflectance, float transmission, float index) {
+        this.ir = rval;
+        this.ig = gval;
+        this.ib = bval;
+        this.ka = ambiance;
+        this.kd = diffuse;
+        this.ks = specular;
+        this.ns = phong;
+        this.kr = reflectance * I255; //Convert reflectance coefficient to scaled value
+        this.kt = transmission;
+        this.nt = index;
     }
 
-    public Color Shade(Vector3D p, Vector3D n, Vector3D v, java.util.List<Object> lights, List<Object> objects, Color bgnd) {
+    /**
+     * computes the shaded colour at a point on the surface using the Phong illumination model.
+     */
+    public Color Shade(Vector3D p, Vector3D n, Vector3D v, java.util.List<Object> lights, List<Object> objects, Color background) {
         float r = 0;
         float g = 0;
         float b = 0;
@@ -87,14 +90,14 @@ class Surface {
                 Vector3D poffset = new Vector3D(p.x + TINY * reflect.x, p.y + TINY * reflect.y, p.z + TINY * reflect.z);
                 Ray reflectedRay = new Ray(poffset, reflect);
                 if (reflectedRay.trace(objects)) {
-                    Color rcolor = reflectedRay.Shade(lights, objects, bgnd);
+                    Color rcolor = reflectedRay.Shade(lights, objects, background);
                     r += kr * rcolor.getRed();
                     g += kr * rcolor.getGreen();
                     b += kr * rcolor.getBlue();
                 } else {
-                    r += kr * bgnd.getRed();
-                    g += kr * bgnd.getGreen();
-                    b += kr * bgnd.getBlue();
+                    r += kr * background.getRed();
+                    g += kr * background.getGreen();
+                    b += kr * background.getBlue();
                 }
             }
         }
