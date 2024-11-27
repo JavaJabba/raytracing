@@ -5,17 +5,29 @@ import java.util.List;
 
 // An example "Renderable" object
 class Sphere implements Renderable {
-    Surface surface;
-    Vector3D center;
-    float radius;
-    float radSqr;
+    private final Surface surface;
+    private final Vector3D center;
+    private final float radius;
+    private final float radSqr;
 
+    /**
+     *construct the Sphere
+     * @param surface surface of sphere
+     * @param center center of sphere
+     * @param radius radius of sphere
+     */
     public Sphere(Surface surface, Vector3D center, float radius) {
         this.surface = surface;
         this.center = center;
         this.radius = radius;
         this.radSqr = radius * radius;
     }
+
+    /**
+     * intersection of the spheres
+     * @param ray ray
+     * @return Boolean
+     */
     @Override
     public boolean intersect(Ray ray) {
         float dx = center.x - ray.origin.x;
@@ -43,6 +55,15 @@ class Sphere implements Renderable {
         ray.object = this;
         return true;
     }
+
+    /**
+     * shade of the sphere
+     * @param ray Ray
+     * @param lights java.util.List<Oblect>
+     * @param objects List<Object>
+     * @param background Colour
+     * @return surface
+     */
     @Override
     public Color Shade(Ray ray, java.util.List<Object> lights, List<Object> objects, Color background) {
         // An object shader doesn't really do too much other than
@@ -67,6 +88,10 @@ class Sphere implements Renderable {
         return surface.Shade(p, n, v, lights, objects, background);
     }
 
+    /**
+     * string
+     * @return string
+     */
     public String toString() {
         return ("sphere " + center + " " + radius);
     }
