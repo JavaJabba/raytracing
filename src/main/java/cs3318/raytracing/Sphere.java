@@ -3,7 +3,7 @@ package cs3318.raytracing;
 import java.awt.*;
 import java.util.List;
 
-// An example "Renderable" object
+// An example of a "Renderable" object
 class Sphere implements Renderable {
     private final Surface surface;
     private final Vector3D center;
@@ -30,14 +30,14 @@ class Sphere implements Renderable {
      */
     @Override
     public boolean intersect(Ray ray) {
-        float dx = center.x - ray.origin.x;
-        float dy = center.y - ray.origin.y;
-        float dz = center.z - ray.origin.z;
-        float v = ray.direction.dot(dx, dy, dz);
+        float dx = center.x - ray.getOrigin().x;
+        float dy = center.y - ray.getOrigin().y;
+        float dz = center.z - ray.getOrigin().z;
+        float v = ray.getDirection().dot(dx, dy, dz);
 
         // Do the following quick check to see if there is even a chance
         // that an intersection here might be closer than a previous one
-        if (v - radius > ray.t)
+        if (v - radius > ray.getT())
             return false;
 
         // Test if the ray actually intersects the sphere
@@ -46,20 +46,20 @@ class Sphere implements Renderable {
             return false;
 
         // Test if the intersection is in the positive
-        // ray direction and it is the closest so far
+        // ray direction, and it is the closest so far
         discriminant = v - ((float) Math.sqrt(discriminant));
-        if ((discriminant > ray.t) || (discriminant < 0))
+        if ((discriminant > ray.getT()) || (discriminant < 0))
             return false;
 
-        ray.t = discriminant;
-        ray.object = this;
+        ray.setT(discriminant);
+        ray.setObject(this);
         return true;
     }
 
     /**
      * shade of the sphere
      * @param ray Ray
-     * @param lights java.util.List<Oblect>
+     * @param lights java.util.List<Object>
      * @param objects List<Object>
      * @param background Colour
      * @return surface
@@ -68,18 +68,18 @@ class Sphere implements Renderable {
     public Color Shade(Ray ray, java.util.List<Object> lights, List<Object> objects, Color background) {
         // An object shader doesn't really do too much other than
         // supply a few critical bits of geometric information
-        // for a surface shader. It must must compute:
+        // for a surface shader. It must compute:
         //
         //   1. the point of intersection (p)
         //   2. a unit-length surface normal (n)
         //   3. a unit-length vector towards the ray's origin (v)
         //
-        float px = ray.origin.x + ray.t * ray.direction.x;
-        float py = ray.origin.y + ray.t * ray.direction.y;
-        float pz = ray.origin.z + ray.t * ray.direction.z;
+        float px = ray.getOrigin().x + ray.getT() * ray.getDirection().x;
+        float py = ray.getOrigin().y + ray.getT() * ray.getDirection().y;
+        float pz = ray.getOrigin().z + ray.getT() * ray.getDirection().z;
 
         Vector3D p = new Vector3D(px, py, pz);
-        Vector3D v = new Vector3D(-ray.direction.x, -ray.direction.y, -ray.direction.z);
+        Vector3D v = new Vector3D(-ray.getDirection().x, -ray.getDirection().y, -ray.getDirection().z);
         Vector3D n = new Vector3D(px - center.x, py - center.y, pz - center.z);
         n.normalize();
 
