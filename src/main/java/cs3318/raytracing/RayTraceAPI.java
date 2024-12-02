@@ -58,7 +58,8 @@ public class RayTraceAPI {
         Vp.y = Vp.y*fl - 0.5f*(width*Du.y + height*Dv.y);
         Vp.z = Vp.z*fl - 0.5f*(width*Du.z + height*Dv.z);
     }
-
+    
+    // Overloading methods to instantiate sphere objects and add them to the objectList
     public void addSphere(float x, float y, float z, float r){
         Vector3D v = new Vector3D(x,y,z);
         objectList.add(new Sphere(currentSurface, v, r));
@@ -68,11 +69,13 @@ public class RayTraceAPI {
         Vector3D v = new Vector3D(x,y,z);
         objectList.add(new Sphere(surface, v, r));
     }
-
+    
+    // Adding a light object to the lightList
     public void addLight(int type, Vector3D v, float r, float b) {
 	lightList.add(new Light(Light.type, v, r, b));
     }
-
+    
+    // Overloading methods to instantiate a surface object and override the default value
     public void setSurface(Surface input){
         currentSurface = input;
     }
@@ -81,6 +84,7 @@ public class RayTraceAPI {
         currentSurface = new Surface(r,g,b,ambience,diffuse,specular,phong,reflectance,transmission,index);
     }
 
+    // Overloading methods to instantiate a camera object and override the default
     public void setCamera(Vector3D cameraPos, Vector3D target){
         eye = cameraPos;
         lookat = target;
@@ -91,6 +95,7 @@ public class RayTraceAPI {
         lookat = new Vector3D(targetx,targety,targetz);
     }
 
+    // Method to change the FOV
     public void changeFov(float input){
         fov = input;
     }

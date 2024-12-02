@@ -18,6 +18,7 @@ public class Controller {
         this.stage = stage;
     }
 
+    // Pixel render method + shows how long the process took
     public void run() {
         long time = System.currentTimeMillis();
         try {
@@ -33,7 +34,8 @@ public class Controller {
             logger.severe("Error occured during rendering: " + e.getMessage());
         }
     }
- 
+
+    // Main controller method, will begin the raytracing process with the given width and height, + components set through the use of the API located in RayTraceAPI.java
     public void startRayTrace(ActionEvent actionEvent, int width, int height) {
         sceneToRender = new RayTraceAPI(width, height);
         this.run();
