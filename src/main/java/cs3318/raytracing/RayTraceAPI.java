@@ -27,11 +27,12 @@ public class RayTraceAPI {
     public RayTraceAPI(int width, int height){
         this.width = width;
         this.height = height;
+        this.background = Color.WHITE;
 
         // Define canvas area and fill with white
         canvas = new Canvas(this.width, this.height);
         gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.WHITE);
+        gc.setFill(background);
         gc.fillRect(0,0,width,height);
 
         // Initialise lists for management
@@ -40,7 +41,7 @@ public class RayTraceAPI {
 
         // Initialise default object values
         currentSurface = new Surface(0.8f, 0.2f, 0.9f, 0.2f, 0.4f, 0.4f, 10.0f, 0f, 0f, 1f);
-        eye = new Vector3D(0,0,10);
+        eye = new Vector3D(0,10,10);
         lookat = new Vector3D(0,0,0);
         up = new Vector3D(0,1,0);
 
@@ -57,4 +58,38 @@ public class RayTraceAPI {
         Vp.y = Vp.y*fl - 0.5f*(width*Du.y + height*Dv.y);
         Vp.z = Vp.z*fl - 0.5f*(width*Du.z + height*Dv.z);
     }
+
+    public void addSphere(float x, float y, float z, float r){
+        Vector3D v = new Vector3D(x,y,z);
+        objectList.add(new Sphere(currentSurface, v, r));
+    }
+
+    public void addSphere(float x, float y, float z, float r, Surface surface){
+        Vector3D v = new Vector3D(x,y,z);
+        objectList.add(new Sphere(surface, v, r));
+    }
+
+    public void setSurface(Surface input){
+        currentSurface = input;
+    }
+
+    public void setSurface(float r, float g, float b, float ambience, float diffuse, float specular, float phong, float reflectance, float transmission, float index){
+        currentSurface = new Surface(r,g,b,ambience,diffuse,specular,phong,reflectance,transmission,index);
+    }
+
+    public void setCamera(Vector3D cameraPos, Vector3D target){
+        eye = cameraPos;
+        lookat = target;
+    }
+
+    public void setCamera(float camerax, float cameray, float cameraz, float targetx, float targety, float targetz){
+        eye = new Vector3D(camerax,cameray,cameraz);
+        lookat = new Vector3D(targetx,targety,targetz);
+    }
+
+    public void changeFov(float input){
+        fov = input;
+    }
+
+
 }
