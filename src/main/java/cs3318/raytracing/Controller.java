@@ -34,11 +34,8 @@ public class Controller {
         }
     }
  
-    // TODO to change into API, instead of rendering from config within a txt file in driver.java
-    public void startRayTrace(ActionEvent actionEvent) {
-        sceneToRender = new Driver((int) renderedImage.getFitWidth(),
-                                   (int) renderedImage.getFitHeight(),
-                "resources/SceneToRender.txt");
+    public void startRayTrace(ActionEvent actionEvent, int width, int height) {
+        sceneToRender = new RayTraceAPI(width, height);
         this.run();
     }
 }
