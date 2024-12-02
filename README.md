@@ -1,31 +1,53 @@
-API design
+# Raytracing Software
 
-Will be structured as function calls with variables built into constructors should be able to be a simple replacement for the text file input
+## Overview
 
-x, y and z positions in all cases will be put within an array ffor the sake of consitency. 
+This program is a raytracing engine designed with a programmatic approach, providing the user a flexible API for defining scenes. Using the API, you can create and configure objects, lights, and surfaces, and add them to the scene that will be rendered.
 
-Camera
-Camera will be it’s own class where the constructor will be formatted as such : Camera({x,y,z},{x,y,z}) where the first set is the position of the camera and the second is the area for the camera to look at.
+### Features
 
-Light
-2 kinds Directional and Abmient
-LightAmbient({x,y,z})
-	x,y,z coodrinates for the light source
-LightDirectional({x,y,z},{x,y,z})
-	First set is position of source second is are to point light towards
+- Create and add objects to an objectList
+- Define and add lights to a lightList
+- Configure surfaces with detailed properties (color, reflectance, transmisskon etc)
 
-Shape
-Shape can be limited into classes per shape that will extend a basic shape class.
-ShapeSphere({x,y,z},r) will be used in place of what is already implemented
-something like ShapeCube({x,y,z},L) should be easy enough to implement
+The overloading methods within provide convenience for direct object creation or reusing default existing values
 
-Surface
-Might have to implement this as a subclass to the shape object as it goes on top of a specific shape might not be too difficult to do. Surface class is extremelty difficult to decipher as it has 10 inputs.
+This raytracing engine will 
 
-RGB, transparency, diffuse reflect coefficient, specular reflect coefficient, specular exponent, reflectivity coefficient (in % of light reflected), transparency coefficient
+- Handle lighting calculations, including ambient, diffuse and specular components
+- Support reflection, transmission, and refraction effects
+- Implement shading for realistic surface rendering
 
-Need to find a way to narrow that down to less inputs as it is too many right now
+### How to use
 
-Maybe set a couple basic coefficients and provide methods to change them just to streamline the process for most users
+You can define surface properties and apply them to objects :
 
-Surface({R,G,B},)
+```
+RayTraceAPI.setSurface(r, g, b, ambience, diffuse, specular, phong, reflectance, transmission, index);
+RayTraceAPI.setSurface(currentSurface);
+```
+
+You can instantiate objects and add them to the objectList :
+
+```
+RayTraceAPI.addSphere(x, y, z, r, surface);
+```
+
+You can instantiate light objects and add them to the lightList:
+
+```
+RayTraceAPI.addLight(type, v, r, b);
+```
+
+You can set the camera :
+
+```
+RayTraceAPI.setCamera(camerax, cameray, cameraz, targetx, targety, targetz);
+RayTraceAPI.setCamera(cameraPos, target);
+```
+
+You can change the FOV :
+
+```
+RayTraceAPI.changeFOV(input);
+```
