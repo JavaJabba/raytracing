@@ -69,6 +69,10 @@ public class RayTraceAPI {
         objectList.add(new Sphere(surface, v, r));
     }
 
+    public void addLight(int type, Vector3D v, float r, float b) {
+	lightList.add(new Light(Light.type, v, r, b));
+    }
+
     public void setSurface(Surface input){
         currentSurface = input;
     }
