@@ -1,6 +1,6 @@
 package cs3318.raytracing;
 
-import java.awt.*;
+import javafx.scene.paint.Color;
 import java.util.List;
 
 // An example of a "Renderable" object

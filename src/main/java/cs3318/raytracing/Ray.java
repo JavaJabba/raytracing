@@ -1,7 +1,7 @@
 package cs3318.raytracing;
 
-import java.awt.*;
 import java.util.List;
+import javafx.scene.paint.Color;
 
 /**
  * class Ray

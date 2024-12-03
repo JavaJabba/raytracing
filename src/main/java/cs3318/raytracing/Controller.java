@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class Controller {
     public ImageView renderedImage;
     private Stage stage;
-    private Driver sceneToRender;
+    private RayTraceAPI sceneToRender;
     private Optional<Boolean> finished = Optional.empty();
 
     Logger logger = Logger.getLogger(Controller.class.getName());

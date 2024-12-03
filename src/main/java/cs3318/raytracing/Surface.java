@@ -1,6 +1,6 @@
 package cs3318.raytracing;
 
-//import java.awt.*;
+import javafx.scene.paint.Color;
 import java.util.List;
 
 /*
@@ -125,6 +125,6 @@ class Surface {
         g = (g < 0) ? 0 : g;
         b = (b < 0) ? 0 : b;
 
-        return new Color(r, g, b);
+        return new Color(WHITE);
     }
 }

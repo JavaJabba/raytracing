@@ -100,5 +100,17 @@ public class RayTraceAPI {
         fov = input;
     }
 
-
+    public void renderPixel(int i, int j) {
+        Vector3D dir = new Vector3D(
+                i*Du.x + j*Dv.x + Vp.x,
+                i*Du.y + j*Dv.y + Vp.y,
+                i*Du.z + j*Dv.z + Vp.z);
+        Ray ray = new Ray(eye, dir);
+        if (ray.trace(objectList)) {
+            gc.setFill(ray.Shade(lightList, objectList, background));
+        } else {
+            gc.setFill(background);
+        }
+        gc.fillOval(i, j, 1, 1);
+    }
 }
